@@ -1,6 +1,6 @@
-const model=require("mongoose");
+const {Schema,model}=require("mongoose");
 
-const cancionInfo = new Schema({
+const cancionSchema = new Schema({
     nombreCancion: String,
     fechaGrabacion: Date,
     duracionCancion: String, 
@@ -9,4 +9,4 @@ const cancionInfo = new Schema({
     _id: Number
   });
 
-  module.exports=model("Cancion",cancionInfo);
+  module.exports=model("Cancion",cancionSchema);
