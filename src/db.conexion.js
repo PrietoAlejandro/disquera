@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 const conexionBD=async()=>{
     
     try{
-        const DB=await mongoose.connect('mongodb+srv://Prieto:ALEJANDRO1014179072@disquera.gavkvmw.mongodb.net/?retryWrites=true&w=majority');
-        console.log("Conexión satisfactoria",DB.connection.name);
+        await mongoose.connect(process.env.conexion);
+            console.log(`conectado`)
     }
-    catch(  error){
+    catch(error){
         console.log(error);
     }
 }
 
-module.exports=conexionBD;
+module.exports={conexionBD};

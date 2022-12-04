@@ -1,12 +1,12 @@
-const {Schema,model}=require("mongoose");
+const { default: mongoose } = require('mongoose');
 
-const cancionSchema = new Schema({
+const Schema = mongoose.Schema({
     nombreCancion: String,
-    fechaGrabacion: Date,
+    fechaGrabacion: String,
     duracionCancion: String, 
     idAlbumFK: String,
     estadoCancion: String,
-    _id: Number
+    _id: String
   });
 
-  module.exports=model("Cancion",cancionSchema);
+  module.exports=mongoose.model("Cancion",Schema);

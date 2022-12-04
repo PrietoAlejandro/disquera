@@ -1,12 +1,8 @@
-const Cancion = require("../models/cancionModel");
+const Cancion = require("../models/Cancion");
 
 exports.obtener = async (req, res) => {
-  try {
-    const canciones = await Cancion.find();
-    res.status(200).json(canciones);
-  } catch (error) {
-    res.status(500).json(error)
-  }
+  const canciones = await Cancion.find()
+    res.status(200).json(canciones)
 
 }
 exports.obtenerid = async (req, res) => {
