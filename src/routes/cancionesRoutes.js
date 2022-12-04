@@ -5,7 +5,7 @@ const ctrCan=require("../controllers/cancionController");
 
 rutasCancion.get('/canciones', ctrCan.obtener);
 
-//rutasCancion.get('/:id', ctrCan.obtenerid);
+rutasCancion.get('/canciones/:id', ctrCan.obtenerid);
 
 /*rutasCancion.post('/login', ctrCan.login);*/
 

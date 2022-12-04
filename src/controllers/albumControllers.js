@@ -1,30 +1,15 @@
-const Cancion = require("../models/Cancion");
+const Album = require("../models/albumModels");
 
 exports.obtener = async (req, res) => {
-  const canciones = await Cancion.find()
-    res.status(200).json(canciones)
+  const albums = await Album.find()
+    res.status(200).json(albums)
 
 }
 exports.obtenerid = async (req, res) => {
   try {
     const id = req.params.id;
-    const canciones = await Cancion.findById(id).populate({
-        path: "Cancion",
-        select: {Cancion:0},
-        populate: 
-        {
-          path: "Album",
-          select: {
-            "nombreCancion":1,
-            "fechaGrabacion":1,
-            "duracionCancion":1,
-            "idAlbumFK":1,
-            "estadoCancion":1,
-            "_id": 1
-          }
-        }
-      });
-    res.status(200).json(canciones);
+    const albums = await Album.findById(id);
+    res.status(200).json(albums);
   } catch (error) {
     res.status(500).json(error)
   }
@@ -34,18 +19,18 @@ exports.add = async (req, res) => {
   try {
 
     //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-    const newCancion = new Cancion(req.body,req.file)
-    console.log(req.file);
+    const newAlbum = new Album(req.body,req.file)
+    Album.log(req.file);
     if(req.file){
       const {filename}=req.file;
-      newCancion.setImg(filename);
+      newAlbum.setImg(filename);
       console.log("si hay imagen")
     }else{
       console.log("No hay imagen")
     }
-    await newCancion.save();
-    console.log(newCancion);
-    res.json({ msj: "Habitación registrada exitosamente", id: newCancion._id })
+    await newAlbum.save();
+    console.log(newAlbum);
+    res.json({ msj: "Habitación registrada exitosamente", id: newAlbum._id })
   } catch (error) {
     res.status(500).json({msj:"Error al registrar"+error})
   }
@@ -55,18 +40,18 @@ exports.add = async (req, res) => {
 exports.edit = async(req, res) => {
   try {
     const id = req.params.id;
-    const newCancion = new Cancion(req.body,req.file)
+    const newAlbum = new Album(req.body,req.file)
     console.log(req.file);
     
     if(req.file){
       const {filename}=req.file;
-      newCancion.setImg(filename);
+      newAlbum.setImg(filename);
       console.log("si hay imagen")
     }else{
       console.log("No hay imagen")
     }
     //console.log(`El id que se va a cambiar estado es ${id}`);
-    const cambioCancion = await Cancion.findByIdAndUpdate(id, newCancion);
+    const cambioAlbum = await Album.findByIdAndUpdate(id, newAlbum);
     res.json({ msj: "Habitación actualizada exitosamente"})
   } catch(error) {
     res.status(500).json(error);
