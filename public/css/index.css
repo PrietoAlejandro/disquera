@@ -1,0 +1,76 @@
+body {
+    background-image: url(/public/img/vinyl-1845272.jpg);
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+fieldset{
+    font-size: 3rem;
+    text-align: center;
+    font-family: cursive;
+    background-color: rgba(255, 255, 255, 0.203);
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    border-radius: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+
+   
+
+    
+}
+.album {
+    color:rgb(0, 0, 0);
+    font-size: 3rem;
+    text-align: center;
+    font-family: cursive;
+    margin: 4rem;
+}
+
+.cancion {
+    color:rgb(0, 0, 0);
+    font-size: 3rem;
+    text-align: center;
+    font-family: cursive;
+    margin: 4rem;
+}
+
+.genero {
+    color:rgb(0, 0, 0);
+    font-size: 3rem;
+    text-align: center;
+    font-family: cursive;
+    margin: 4rem;
+
+}
+
+.get {
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 40px;
+    font-family: cursive;
+}
+
+.post {
+   
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 40px;
+    font-family: cursive;
+}
+
+.put {
+   
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 40px;
+    font-family: cursive;
+}
+
+.delete {
+  
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 40px;
+    font-family: cursive;
+}
