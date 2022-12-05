@@ -14,6 +14,8 @@ app.use(express.json());
 //Llamado de rutas
 app.use('/api', require('./src/routes/cancionesRoutes'));
 app.use('/api', require('./src/routes/albumsRoutes'));
+app.use('/api', require('./src/routes/generoRoutes'));
+
 //app.use("/api/users",rutasUser);
 
 app.get('/', (req,res)=>{

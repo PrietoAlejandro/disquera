@@ -16,23 +16,24 @@ exports.obtenerid = async (req, res) => {
 
 }
 exports.add = async (req, res) => {
-  try {
+  try 
+  {
+    const { nombreAlbum, anioPublicacion, idArtistaFK, idGeneroFK, estadoAlbum } = req.body
+    console.log(Album)
 
-    //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-    const newAlbum = new Album(req.body,req.file)
-    Album.log(req.file);
-    if(req.file){
-      const {filename}=req.file;
-      newAlbum.setImg(filename);
-      console.log("si hay imagen")
-    }else{
-      console.log("No hay imagen")
+    if (nombreAlbum && anioPublicacion && idArtistaFK && idGeneroFK && estadoAlbum) 
+    {
+        const newAlbum = new Album({ nombreAlbum, anioPublicacion, idArtistaFK, idGeneroFK, estadoAlbum })
+        await newAlbum.save()
+
+        res.json({ mensaje: "Album registrado exitosamente", id: newAlbum.id })
+    } 
+    else 
+    {
+        res.json({ mensaje: "Por favor relleno todos los campos" })
     }
-    await newAlbum.save();
-    console.log(newAlbum);
-    res.json({ msj: "Habitación registrada exitosamente", id: newAlbum._id })
-  } catch (error) {
-    res.status(500).json({msj:"Error al registrar"+error})
+      } catch (error) {
+    res.json(error)
   }
 
 }
@@ -42,17 +43,10 @@ exports.edit = async(req, res) => {
     const id = req.params.id;
     const newAlbum = new Album(req.body,req.file)
     console.log(req.file);
-    
-    if(req.file){
-      const {filename}=req.file;
-      newAlbum.setImg(filename);
-      console.log("si hay imagen")
-    }else{
-      console.log("No hay imagen")
-    }
+  
     //console.log(`El id que se va a cambiar estado es ${id}`);
     const cambioAlbum = await Album.findByIdAndUpdate(id, newAlbum);
-    res.json({ msj: "Habitación actualizada exitosamente"})
+    res.json({ msj: "Album actualizada exitosamente"})
   } catch(error) {
     res.status(500).json(error);
   }

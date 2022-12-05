@@ -8,22 +8,7 @@ exports.obtener = async (req, res) => {
 exports.obtenerid = async (req, res) => {
   try {
     const id = req.params.id;
-    const canciones = await Cancion.findById(id).populate({
-        path: "Cancion",
-        select: {Cancion:0},
-        populate: 
-        {
-          path: "Album",
-          select: {
-            "nombreCancion":1,
-            "fechaGrabacion":1,
-            "duracionCancion":1,
-            "idAlbumFK":1,
-            "estadoCancion":1,
-            "_id": 1
-          }
-        }
-      });
+    const canciones = await Cancion.findById(id);
     res.status(200).json(canciones);
   } catch (error) {
     res.status(500).json(error)
@@ -31,23 +16,24 @@ exports.obtenerid = async (req, res) => {
 
 }
 exports.add = async (req, res) => {
-  try {
+  try 
+  {
+    const { nombreCancion, fechaGrabacion, duracionCancion, idAlbumFK, estadoCancion } = req.body
+    console.log(Cancion)
 
-    //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-    const newCancion = new Cancion(req.body,req.file)
-    console.log(req.file);
-    if(req.file){
-      const {filename}=req.file;
-      newCancion.setImg(filename);
-      console.log("si hay imagen")
-    }else{
-      console.log("No hay imagen")
+    if (nombreCancion && fechaGrabacion && duracionCancion && idAlbumFK && estadoCancion) 
+    {
+        const newCancion = new Cancion({ nombreCancion, fechaGrabacion, duracionCancion, idAlbumFK, estadoCancion })
+        await newCancion.save()
+
+        res.json({ mensaje: "Cliente registrado exitosamente", id: newCancion.id })
+    } 
+    else 
+    {
+        res.json({ mensaje: "Por favor relleno todos los campos" })
     }
-    await newCancion.save();
-    console.log(newCancion);
-    res.json({ msj: "Habitación registrada exitosamente", id: newCancion._id })
-  } catch (error) {
-    res.status(500).json({msj:"Error al registrar"+error})
+      } catch (error) {
+    res.json(error)
   }
 
 }
@@ -58,16 +44,8 @@ exports.edit = async(req, res) => {
     const newCancion = new Cancion(req.body,req.file)
     console.log(req.file);
     
-    if(req.file){
-      const {filename}=req.file;
-      newCancion.setImg(filename);
-      console.log("si hay imagen")
-    }else{
-      console.log("No hay imagen")
-    }
-    //console.log(`El id que se va a cambiar estado es ${id}`);
     const cambioCancion = await Cancion.findByIdAndUpdate(id, newCancion);
-    res.json({ msj: "Habitación actualizada exitosamente"})
+    res.json({ msj: "Cancion actualizada exitosamente"})
   } catch(error) {
     res.status(500).json(error);
   }

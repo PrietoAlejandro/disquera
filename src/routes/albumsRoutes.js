@@ -3,9 +3,11 @@ const rutasAlbum=Router();
 const ctrAlb=require("../controllers/albumControllers");
 //const autorizedHuesped=require("../auth/auth.huesped");
 
+const multer=require("multer");
+
 rutasAlbum.get('/albums', ctrAlb.obtener);
 
-//rutasAlbum.get('/album/id', ctrAlb.obtenerid);
+rutasAlbum.get('/album/:id', ctrAlb.obtenerid);
 
 /*rutasCancion.post('/login', ctrCan.login);*/
 

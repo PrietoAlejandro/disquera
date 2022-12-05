@@ -5,8 +5,16 @@ const Schema = mongoose.Schema({
     anioPublicacion: String,
     idArtistaFK: String, 
     idGeneroFK: String,
-    estadoAlbum: String,
-    _id: String
+    estadoAlbum: String
+
+   /* generoControllers: [{
+      type: Schema.Types.Number,
+      ref: 'generoModel'
+    }],
+    cancionControllers: [{
+      type: Schema.Types.Number,
+      ref: 'Cancion'
+    }]*/
   });
 
   module.exports=mongoose.model("album",Schema);

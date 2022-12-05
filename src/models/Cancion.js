@@ -5,8 +5,7 @@ const Schema = mongoose.Schema({
     fechaGrabacion: String,
     duracionCancion: String, 
     idAlbumFK: String,
-    estadoCancion: String,
-    _id: String
+    estadoCancion: String    
   });
 
   module.exports=mongoose.model("Cancion",Schema);
