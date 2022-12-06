@@ -7,20 +7,22 @@ const {conexionBD} = require('./src/db.conexion');
 //Conexión a la BD
 conexionBD();
 const app = express()
-//const port= process.env.PORT || 3000;
+const PORT= process.env.PORT || 3000;
+
+app.set('view engine', 'ejs')
+
+app.use(express.static('public'))
 
 app.use(express.json());
 
 //Llamado de rutas
+app.use('/', express.static('../public/index'));
 app.use('/api', require('./src/routes/cancionesRoutes'));
 app.use('/api', require('./src/routes/albumsRoutes'));
 app.use('/api', require('./src/routes/generoRoutes'));
 
 //app.use("/api/users",rutasUser);
 
-app.get('/', (req,res)=>{
-    res.send('Hola')
-})
-app.listen(3000)
+app.listen(PORT)
 
 module.exports=app;

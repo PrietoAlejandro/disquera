@@ -44,16 +44,9 @@ exports.edit = async(req, res) => {
     const newGenero = new Genero(req.body,req.file)
     console.log(req.file);
     
-    if(req.file){
-      const {filename}=req.file;
-      newGenero.setImg(filename);
-      console.log("si hay imagen")
-    }else{
-      console.log("No hay imagen")
-    }
     //console.log(`El id que se va a cambiar estado es ${id}`);
     const cambioGenero = await Genero.findByIdAndUpdate(id, newGenero);
-    res.json({ msj: "Habitación actualizada exitosamente"})
+    res.json({ msj: "Genero actualizada exitosamente"})
   } catch(error) {
     res.status(500).json(error);
   }
